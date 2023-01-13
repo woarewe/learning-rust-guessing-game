@@ -8,6 +8,10 @@ impl Rectangle {
     fn area(&self) -> u32 {
         self.width * self.height
     }
+
+    fn width(self: &Self) -> u32 {
+        self.width
+    }
 }
 
 fn main() {
@@ -21,6 +25,6 @@ fn main() {
         "The area of the rectangle is {} square pixels.",
         rectangle.area()
     );
-    println!("Rectangle: {:#?}", rectangle);
+    println!("Rectangle width: {:#?}", rectangle.width());
     dbg!(&rectangle);
 }
