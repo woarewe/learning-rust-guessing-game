@@ -1,3 +1,4 @@
+#[derive(Debug)]
 struct Rectangle {
     height: u32,
     width: u32
@@ -14,6 +15,7 @@ fn main() {
         "The area of the rectangle is {} square pixels.",
         area(&rectangle)
     );
+    println!("Rectangle: {:?}", rectangle);
 }
 
 fn area(rectangle: &Rectangle) -> u32 {
