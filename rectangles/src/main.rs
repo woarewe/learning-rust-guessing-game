@@ -18,6 +18,12 @@ impl Rectangle {
     }
 }
 
+impl Rectangle {
+    fn square(size: u32) -> Self {
+        Self { width: size, height: size }
+    }
+}
+
 fn main() {
     let scale = 2;
     let rectangle = Rectangle {
@@ -28,10 +34,7 @@ fn main() {
         height: 20,
         width: 10
     };
-    let bigger_one = Rectangle {
-        height: 100,
-        width: 100
-    };
+    let bigger_one = Rectangle::square(100);
 
     println!(
         "The area of the rectangle is {} square pixels.",
