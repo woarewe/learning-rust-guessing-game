@@ -1,15 +1,32 @@
 mod front_of_house {
-    mod hosting {
-        fn add_to_waitlist() {}
+    pub struct Order {}
 
-        fn seat_at_table() {}
+    impl Order {
+        pub fn new() -> Self {
+            Self {}
+        }
     }
 
-    mod serving {
-        fn take_order() {}
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
 
-        fn server_order() {}
-
-        fn take_payment() {}
+        pub fn seat_at_table() {}
     }
+
+    pub mod serving {
+        pub fn take_order() {}
+
+        pub fn server_order() {}
+
+        pub fn take_payment() {}
+    }
+}
+
+pub fn eat_at_restaurant() {
+    crate::front_of_house::hosting::add_to_waitlist();
+
+    front_of_house::hosting::add_to_waitlist();
+
+    let a: front_of_house::Order;
+    a = front_of_house::Order::new();
 }
