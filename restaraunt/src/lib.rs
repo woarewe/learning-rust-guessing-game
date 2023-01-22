@@ -1,9 +1,11 @@
 mod front_of_house {
-    pub struct Order {}
+    pub struct Order {
+        id: usize
+    }
 
     impl Order {
-        pub fn new() -> Self {
-            Self {}
+        pub fn new(id: usize) -> Self {
+            Self { id }
         }
     }
 
@@ -28,5 +30,20 @@ pub fn eat_at_restaurant() {
     front_of_house::hosting::add_to_waitlist();
 
     let a: front_of_house::Order;
-    a = front_of_house::Order::new();
+    // The below line won't compile and I am so happy about that
+    // let b = front_of_house::Order { id: 34 }; 
+    a = front_of_house::Order::new(34);
+}
+
+fn deliver_order() {}
+
+mod back_of_house {
+    fn fix_incorrect_order() {
+        use super::*;
+
+        cook_order();
+        deliver_order();
+    }
+
+    fn cook_order() {}
 }
