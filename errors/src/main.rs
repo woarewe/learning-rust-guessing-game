@@ -1,6 +1,7 @@
 use std::fs::File;
 use std::io::ErrorKind;
 
+pub mod unwrap_or_else;
 
 fn main() {
     let path = "../tmp/helsflo.txt";
@@ -18,4 +19,6 @@ fn main() {
             }
         }
     };
+
+    unwrap_or_else::run();
 }
