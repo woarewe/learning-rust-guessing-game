@@ -1,4 +1,9 @@
-use aggregator::{notify, Summary, Tweet, NewsArticle, NewsFeed};
+use aggregator::{
+    notify,
+    notify_v2 as alert,
+    notify_v3 as update,
+    Summary, Tweet, NewsArticle, NewsFeed
+};
 
 fn main() {
     let tweet = Tweet {
@@ -18,4 +23,8 @@ fn main() {
     println!("{}", feed.summarize());
     notify(&feed);
     notify(&tweet);
+    alert(&feed);
+
+    alert(&String::from("lol"));
+    update(&feed);
 }

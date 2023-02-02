@@ -53,3 +53,24 @@ impl Summary for NewsFeed {
 pub fn notify(item: &impl Summary) {
     println!("Breaking news! {}", item.summarize());
 }
+
+pub fn notify_v2<T: Summary>(item: &T) {
+    println!("Breaking news v2! {}", item.summarize());
+}
+
+pub fn notify_v3<T>(item: &T)
+where
+    T: Summary
+{
+    println!("Breaking news v3! {}", item.summarize());
+}
+
+impl Summary for String {
+    fn summarize(&self) -> String {
+        format!("{}", self)
+    }
+
+    fn summarize_author(&self) -> String {
+        String::from("None")
+    }
+}
