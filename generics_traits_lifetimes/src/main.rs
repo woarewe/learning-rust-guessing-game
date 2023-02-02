@@ -20,6 +20,13 @@ impl  <T, U> Point<T, U> {
     fn x(&self) -> &T {
         &self.x
     }
+
+    fn mixup<X1, Y1>(self, other: Point<X1, Y1>) -> Point<T, Y1> {
+        Point {
+            x: self.x,
+            y: other.y
+        }
+    }
 }
 
 impl Point<i32, i32> {
@@ -44,6 +51,12 @@ fn main() {
 
    println!("{:?}", both_integers.x());
    println!("{:?}", both_integers.int_x());
+
+
+   let chars_and_strings = Point { x: 'a', y: "str" };
+   let mixed = both_integers.mixup(chars_and_strings);
+
+   println!("{:?}", mixed);
 
    // Won't compile
    // println!("{:?}", integer_and_float.int_x());
