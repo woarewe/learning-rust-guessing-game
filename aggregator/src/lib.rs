@@ -49,3 +49,7 @@ impl Summary for NewsFeed {
         String::from("Internet")
     }
 }
+
+pub fn notify(item: &impl Summary) {
+    println!("Breaking news! {}", item.summarize());
+}
