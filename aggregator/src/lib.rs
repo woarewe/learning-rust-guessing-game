@@ -1,5 +1,7 @@
 pub trait Summary {
-    fn summarize(self: &Self) -> String;
+    fn summarize(self: &Self) -> String {
+        String::from("Read more...")
+    }
 }
 
 pub struct NewsArticle {
@@ -27,3 +29,9 @@ impl Summary for Tweet {
         format!("{}: {}", self.username, self.content)
     }
 }
+
+pub struct NewsFeed {
+   pub messages: Vec<String>
+}
+
+impl Summary for NewsFeed {}
