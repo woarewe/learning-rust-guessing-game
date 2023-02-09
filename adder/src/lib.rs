@@ -14,6 +14,10 @@ impl Rectangle {
     }
 }
 
+fn add_two(value: u32) -> u32 {
+    value + 2
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -51,5 +55,10 @@ mod tests {
         };
 
         assert!(!smaller.can_hold(&larger));
+    }
+
+    #[test]
+    fn it_adds_two() {
+        assert_eq!(4, add_two(2));
     }
 }
