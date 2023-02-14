@@ -1,6 +1,7 @@
 use std::env;
 use std::fs;
 use std::process;
+use std::error::Error;
 
 struct Config {
     query: String,
@@ -19,6 +20,13 @@ impl Config {
     }
 }
 
+fn run(config: Config) -> Result<(), Box<dyn Error>> {
+    let contents = fs::read_to_string(config.file_path)?;
+
+    println!("With text:\n{contents}");
+    Ok(())
+}
+
 fn main() {
     let args: Vec<String> = env::args().collect();
 
@@ -27,8 +35,5 @@ fn main() {
         process::exit(1);
     });
 
-    let contents = fs::read_to_string(config.file_path)
-        .expect("Should have been able to read the file");
-
-    println!("With text:\n{contents}");
+    run(config);
 }
