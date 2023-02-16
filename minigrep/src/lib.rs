@@ -1,9 +1,18 @@
 use std::fs;
 use std::error::Error;
+use std::env;
 
+#[derive(Debug)]
+pub enum SearchMode {
+    CaseSensitive,
+    CaseInsensitive
+}
+
+#[derive(Debug)]
 pub struct Config {
     query: String,
-    file_path: String
+    file_path: String,
+    search_mode: SearchMode,
 }
 
 impl Config {
@@ -14,14 +23,28 @@ impl Config {
         let query = args[1].clone();
         let file_path = args[2].clone();
 
-        Ok(Self { query, file_path })
+        let search_mode = match env::var("IGNORE_CASE") {
+            Ok(_) => SearchMode::CaseInsensitive,
+            Err(_) => SearchMode::CaseSensitive
+        };
+
+        let  search_mode = dbg!(search_mode);
+
+        Ok(Self { query, file_path, search_mode })
     }
 }
 
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.file_path)?;
 
-    for line in search(&config.query, &contents) {
+    println!("{:?}", config.search_mode);
+
+    let results = match config.search_mode {
+        SearchMode::CaseSensitive => search(&config.query, &contents),
+        SearchMode::CaseInsensitive => search_case_insensitive(&config.query, &contents)
+    };
+
+    for line in results {
         println!("{line}");
     }
 
@@ -36,6 +59,8 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
             results.push(line);
         }
     }
+
+    let results = dbg!(results);
 
     return results;
 }
