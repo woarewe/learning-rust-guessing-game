@@ -15,11 +15,15 @@ pub struct Config {
     search_mode: SearchMode,
 }
 
+fn skip_programm_name(args: &mut impl Iterator<Item = String>) {
+    args.next();
+}
+
 impl Config {
     pub fn build(
         mut args: impl Iterator<Item = String>
     ) -> Result<Self, &'static str> {
-        args.next();
+        skip_programm_name(&mut args);
 
         let query = match args.next() {
             Some(arg) => arg,
